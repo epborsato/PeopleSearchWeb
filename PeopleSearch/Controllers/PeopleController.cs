@@ -35,15 +35,9 @@ namespace PeopleSearch.Controllers
 
         // GET: api/People/5
         [ResponseType(typeof(People))]
-        public async Task<IHttpActionResult> GetPeople(int id)
+        public People GetPeople(int id)
         {
-            People people = await db.People.FindAsync(id);
-            if (people == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(people);
+            return db.People.FirstOrDefault(people => people.Id == id);
         }
 
         // PUT: api/People/5
@@ -100,7 +94,7 @@ namespace PeopleSearch.Controllers
         [ResponseType(typeof(People))]
         public async Task<IHttpActionResult> DeletePeople(int id)
         {
-            People people = await db.People.FindAsync(id);
+            People people = this.GetPeople(id);
             if (people == null)
             {
                 return NotFound();

@@ -18,6 +18,14 @@ namespace PeopleSearch.Controllers
     {
         private PeopleContext db = new PeopleContext();
 
+        public SearchController() { }
+
+        public SearchController(PeopleContext context)
+        {
+            this.db = context;
+        }
+
+
         // GET: api/Search
 
         public IQueryable<People> GetPeople()

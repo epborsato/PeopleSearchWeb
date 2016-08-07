@@ -19,6 +19,6 @@ namespace PeopleSearch.Models
         {
         }
 
-        public System.Data.Entity.DbSet<PeopleSearch.Models.People> People { get; set; }
+        public virtual IDbSet<PeopleSearch.Models.People> People { get; set; }
     }
 }
