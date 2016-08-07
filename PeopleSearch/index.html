@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>People Search</title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>
+                People search
+                <small>Web app</small>
+            </h1>
+
+            <div class="row">
+                <div class="span8">
+                    <div data-bind="if: People">
+                        <h3>Enter new record</h3>
+                        <table class="table table-bordered table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td>First Name*</td>
+                                    <td><input data-bind="value: $root.FirstName" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name</td>
+                                    <td><input data-bind="value: $root.LastName" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td><input data-bind="value: $root.Address" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Age*</td>
+                                    <td><input data-bind="value: $root.Age" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Interests</td>
+                                    <td><input data-bind="value: $root.Interests" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Picture</td>
+                                    <td><input type='file' height="20" data-bind='file: {data: $root.Picture, name: fileName}'></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><button class="btn" data-bind="click: $root.create">New</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div data-bind="ifnot: People()">
+                        <div>
+                            Filter by first name: <input data-bind="value: $root.SearchString, valueUpdate: 'afterkeydown'" />
+                            <span data-bind="if: $root.isSearching"><img src="img/large_gears.gif" width="40" height="40"  />searching...</span>
+                        </div>
+                        <br/>
+                        <div>
+                            <button class="btn" data-bind="click: $root.newPeople">New record</button>
+                        </div>
+                        <table class="table table-bordered table-condensed" data-bind="visible: allPeople().length > 0">
+                            <thead>
+                                <tr>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Address</th>
+                                    <th>Age</th>
+                                    <th>Interests</th>
+                                    <th>Picture</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: allPeople()">
+                                <tr>
+                                    <td><span data-bind="text: FirstName"></span></td>
+                                    <td><span data-bind="text: LastName"></span></td>
+                                    <td><span data-bind="text: Address"></span></td>
+                                    <td><span data-bind="text: Age"></span></td>
+                                    <td><span data-bind="text: Interests"></span></td>
+                                    <td><img data-bind="attr: {src: Picture}"></img></td>
+                                    <td><button class="btn" data-bind="click: $root.edit">edit</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p data-bind="visible: error, text: error" class="text-error"></p>
+                    <p class="text-info" data-bind="visible: !error() && allPeople().length == 0">No records found.</p>
+                </div>
+            </div>
+
+        </div>
+        <script src="Scripts/jquery-2.0.3.js"></script>
+        <script src="Scripts/knockout-2.3.0.js"></script>
+        <script src="Scripts/knockout-file-binding.js"></script>
+        <script src="Scripts/app.js"></script>
+</body>
+</html>
