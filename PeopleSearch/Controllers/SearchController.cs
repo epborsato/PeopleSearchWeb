@@ -44,7 +44,7 @@ namespace PeopleSearch.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                people = people.Where(s => s.FirstName.Contains(searchString));
+                people = people.Where(s => s.FirstName.Contains(searchString) || s.LastName.Contains(searchString));
             }
             if (searchString.StartsWith("s"))
             {
